@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+    
+    {% block head %}
+
+        <link rel="stylesheet" href="{{url_for('static', filename='css/login.style.css')}}">
+
+    {% endblock %}
+
+    {% block content %}
+
+    <!--modal recuperar password-->
+
+    <div class="modal fade" id="modalRecuperarPass" tabindex="-1" aria-labelledby="modalRecuperarPass" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Recuperar password</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p class="text-secondary">Se deseja recuperar a sua password introduza o seu email:</p>
+                        <div class="input-group">
+                            <span class="input-group-text color-white bg-color-reg  border-reg" id="email"><i class="fa-solid fa-envelope"></i></span>
+                            <input type="email" class="form-control border-reg" placeholder="Email" aria-label="email" aria-describedby="email">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-reg">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--fim modal recuperar password-->
+
+
+    <div class="container mt-5 pt-5">
+        <div class="row justify-content-center mt-5">
+            <div class="col-auto mt-5 text-center">
+                <img src="{{url_for('static', filename='img/regtel_logo_green.svg')}}" alt="logo" class="color-reg logo">
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-5 text-center">
+                <form>
+                    <input class="form-control my-1" type="text" placeholder="Username">
+                    <input class="form-control my-3" type="password" placeholder="Password">
+                    <button class="btn btn-reg w-100 mb-3">Login</button>
+                    <a class="color-reg c-pointer" data-bs-toggle="modal" data-bs-target="#modalRecuperarPass">Recuperar password</a>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+    

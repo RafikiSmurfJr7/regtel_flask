@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+    {% block head %}
+    
+        <link rel="stylesheet" href="{{url_for('static', filename='css/profile.style.css')}}">
+        <title>Profile</title>    
+    {% endblock %}
+
+
+    {% block content %}
+
+    <!--modal alterar imagem-->
+
+    <div class="modal fade" id="alterarImagem" tabindex="-1" aria-labelledby="alterarImagem" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Alterar imagem</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p class="text-center"><img src="{{url_for('static', filename='img/joaquima.jpg')}}" alt="profile photo" width="175" height="175" style="border-radius: 50%;"></p>
+                        <p class="text-center">
+                            <button id="file1" class="mt-2 btn btn-reg">Carregar imagem&nbsp;&nbsp;<i class="fa-solid fa-upload"></i></button>
+                            <input style="display:none;" type="file" id="file2">
+                        </p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-reg">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--fim modal alterar imagem-->
+
+    <!--modal alterar dados pessoais-->
+
+    <div class="modal fade" id="alterarDados" tabindex="-1" aria-labelledby="alterarDados" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Alterar dados pessoais</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-color-reg color-white border-reg" id="nome"><i class="fa-solid fa-user"></i></span>
+                                        <input type="text" class="form-control border-reg" placeholder="Nome" aria-label="nome" aria-describedby="nome">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-color-reg color-white border-reg" id="data"><i class="fa-regular fa-calendar-days"></i></span>
+                                        <input type="date" class="form-control border-reg" placeholder="yyyy-mm-dd" aria-label="data" aria-describedby="data">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-color-reg color-white border-reg" id="email"><i class="fa-solid fa-envelope"></i></span>
+                                        <input type="email" class="form-control border-reg" placeholder="Email" aria-label="email" aria-describedby="email">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-color-reg color-white border-reg" id="telemovel"><i class="fa-solid fa-phone"></i></span>
+                                        <input type="number" class="form-control border-reg" placeholder="Telemovel" aria-label="telemovel" aria-describedby="telemovel">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-color-reg color-white border-reg" id="entidade"><i class="fa-solid fa-building"></i></span>
+                                        <input type="text" class="form-control border-reg" placeholder="Entidade" aria-label="entidade" aria-describedby="entidade">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-color-reg color-white border-reg" id="funcao"><i class="fa-solid fa-people-arrows"></i></span>
+                                        <input type="text" class="form-control border-reg" placeholder="Função" aria-label="funcao" aria-describedby="funcao">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-reg">Guardar alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--fim modal alterar dados pessoais-->
+
+    <!--modal editar sobre-->
+
+    <div class="modal fade" id="editarSobre" tabindex="-1" aria-labelledby="editarSobre" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Editar sobre</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <p class="text-secondary">Sobre si:</p>
+                        <textarea class="form-control" placeholder="Escreva aqui..." rows="5"></textarea>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-reg">Guardar alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--fim modal editar sobre-->
+
+
+
+
+    {% include 'navbar.html' %}
+
+
+
+    <div class="container">
+        <div class="row justify-content-between mt-5">
+            <div class="col-auto my-1">
+                <button class="btn btn-reg" data-bs-toggle="modal" data-bs-target="#alterarImagem">Alterar imagem&nbsp;&nbsp;<i class="fa-solid fa-image"></i></button>
+            </div>
+            <div class="col-auto my-1">
+                <button class="btn btn-reg" data-bs-toggle="modal" data-bs-target="#alterarDados">Editar dados pessoais&nbsp;&nbsp;<i class="fa-solid fa-person"></i></button>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-xl-5 ">
+                <div class="container mt-2 py-1 cont">
+                    <div class="row justify-content-center row align-items-center">
+                        <div class="col-auto text-center mt-5 mb-3">
+                            <img src="{{url_for('static', filename='img/joaquima.jpg')}}" alt="profile photo" width="175" height="175" style="border-radius: 50%;">
+                            <p class="text-secondary fs-5 mt-4">Joaquim</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="container mt-2 cont px-5">
+                    <div class="row row align-items-center">
+                        <div class="col-auto mt-3 mb-1">
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <p class="mb-0 text-secondary ts-09r">Nome Completo</p>
+                                    <p class="mt-0 text-secondary"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Joaquim António Portugal Baptista de Almeida</p>
+                                </div>
+                                <div class="col-auto">
+                                    <p class="mb-0 text-secondary ts-09r">Data de Nascimento</p>
+                                    <p class="mt-0 text-secondary">1957-03-15</p>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <p class="mb-0 text-secondary ts-09r">Email</p>
+                                    <p class="mt-0 text-secondary"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;joaquima@gmail.com</p>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <p class="mb-0 text-secondary ts-09r">Contactos</p>
+                                    <p class="mt-0 text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;914289731</p>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <p class="mb-0 text-secondary ts-09r">Entidade</p>
+                                    <p class="mt-0 text-secondary"><i class="fa-solid fa-building"></i>&nbsp;&nbsp;Camera municipal de monchique</p>
+                                </div>
+                                <div class="col-auto">
+                                    <p class="mb-0 text-secondary ts-09r">Função</p>
+                                    <p class="mt-0 text-secondary"><i class="fa-solid fa-people-arrows"></i>&nbsp;&nbsp;Presidente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="container cont mt-3  px-4">
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-secondary fs-5 mt-3 mb-1">Sobre:</p>
+                            <p class="text-secondary mt-0">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquet, nisl eget aliquam molestie, nibh quam gravida est, a congue ipsum leo et tellus. Integer ut enim semper felis luctus finibus. Suspendisse tempus interdum hendrerit. Nunc viverra nec lectus iaculis feugiat. Phasellus aliquet risus eget mauris faucibus maximus. Phasellus accumsan convallis massa nec ultricies. Nunc dictum orci ut erat eleifend, ut pulvinar lectus iaculis. Nullam et bibendum orci.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-2 mb-5">
+            <div class="col-auto">
+                <button class="btn btn-reg" data-bs-toggle="modal" data-bs-target="#editarSobre">Editar sobre&nbsp;&nbsp;<i class="fa-solid fa-pen-to-square"></i></button>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+
+    <script>
+
+        $('#file1').on('click',(e) => {
+            e.preventDefault();
+            $('#file2').click();
+        });
+
+
+        
+    </script>
+
+{% endblock %}

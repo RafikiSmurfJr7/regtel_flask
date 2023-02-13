@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {{url_for('static', filename='node_modules/@fortawesome/fontawesome-free/css/all.min.css')}} ">
+    <link rel="stylesheet" href="{{url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='node_modules/datatables.net-bs5/css/dataTables.bootstrap5.css')}}"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/geral.style.css')}}">
+    {% block head%} {% endblock %}
+</head>
+<body>
+
+
+
+    {% block content %} {% endblock %}
+
+
+    <script src="{{url_for('static', filename='node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='node_modules/datatables.net/js/jquery.dataTables.min.')}}"></script>
+    <script src="{{url_for('static', filename='node_modules/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{url_for('static', filename='node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{url_for('static', filename='node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
+    
+    {% block script %} {% endblock %}
+</body>
+</html>

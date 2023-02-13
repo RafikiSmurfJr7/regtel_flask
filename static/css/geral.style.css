@@ -1,0 +1,45 @@
+.color-reg{
+    color: #045F28;
+}
+.color-white{
+    color: white;
+}
+.bg-color-reg{
+    background-color: #045F28;
+}
+.bg-white{
+    background-color: white;
+}
+.bg-light-grey{
+    background-color: #D9D9D9;
+}
+
+.btn-reg{
+    background: #045F28;
+    border-radius: 4px;
+    color: white;
+}
+
+.border-reg{
+    border: 1px solid #045F28;
+}
+
+.btn-reg:hover{
+    background: #045F28;
+    border-radius: 4px;
+    color: white;
+    opacity: 0.90;
+}
+.c-pointer{
+    cursor: pointer;
+}
+.border-10{
+    border-radius: 10px!important;
+}
+.ts-4r{
+    font-size: 10rem!important;
+}
+
+.ts-09r{
+    font-size: 0.9rem;
+}

@@ -1,0 +1,236 @@
+    {%extends 'base.html'%}
+
+    {% block head %} 
+        <link rel="stylesheet" href="{{url_for('static', filename='css/home.style.css')}}">
+    {% endblock %}
+
+    {% block content %}
+
+
+    <!--modal adicionar registo-->
+
+
+    <div class="modal fade" id="adicionarRegisto" tabindex="-1" aria-labelledby="adicionarRegisto" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Adicionar Registo</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mt-2">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="nome">Nome</span>
+                                    <input type="text" class="form-control border-reg" aria-label="Username" aria-describedby="nome">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="input-group mt-3">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="email">Email</span>
+                                    <input type="text" class="form-control border-reg" aria-label="Email" aria-describedby="email">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mt-3">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="data"><i class="fa-regular fa-calendar-days"></i></span>
+                                    <input type="date" class="form-control border-reg" aria-label="Data" aria-describedby="data">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mt-3">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="nPessoal">Nº Pessoal</span>
+                                    <input type="number" class="form-control border-reg" aria-label="NPessoal" aria-describedby="nPessoal">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mt-3">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="nTrabalho">Nº Trabalho</span>
+                                    <input type="number" class="form-control border-reg" aria-label="NTrabalho" aria-describedby="nTrabalho">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mt-3">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="funcao">Função</span>
+                                    <input type="text" class="form-control border-reg" aria-label="Funcao" aria-describedby="funcao">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mt-3">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="entidade">Entidade</span>
+                                    <input type="text" class="form-control border-reg" aria-label="Entidade" aria-describedby="entidade">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <p class="ts-4r">
+                                    <i class="fa-solid fa-circle-user text-secondary"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <button id="addFile" class="btn btn-reg">Adicionar foto&nbsp;&nbsp;<i class="fa-solid fa-image"></i></button>
+                                <input style="display:none;" type="file" id="addFile2">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-reg">Guardar Registo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--fim modal adicionar registo-->
+
+    <!-- modal remover registo -->
+
+    <div class="modal fade" id="removerRegisto" tabindex="-1" aria-labelledby="removerRegisto" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Remover registo</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-secondary">Tem a certeza que deseja remover este registo?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-danger">Remover</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- fim modal remover registo -->
+
+
+    
+    {% include 'navbar.html' %}
+
+
+    <div class="container mt-4 mb-5">
+        <div class="row justify-content-end mb-3">
+            <div class="col-auto">
+                <button class="btn btn-reg" data-bs-toggle="modal" data-bs-target="#adicionarRegisto">Adicionar registo&nbsp;&nbsp;<i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <table class="table py-3 text-center" id="table">
+                    <thead>
+                        <tr class="bg-color-reg">
+                            <td colspan="8" class="text-center color-white">
+                                <b>Registos Telefónicos</b>
+                            </td>
+                        </tr>
+                        <tr class="bg-light-grey color-reg ">
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Função</th>
+                            <th>Entidade</th>
+                            <th>Numero de telemovel</th>
+                            <th>Email</th>
+                            <th>Data de registo</th>
+                            <th>Gerir Registo</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr>
+                            <td>1</td>
+                            <td>Joaquim de Almeida</td>
+                            <td>Presidente</td>
+                            <td>Camera municipal de monchique</td>
+                            <td>914289731</td>
+                            <td>joaquima@gmail.com</td>
+                            <td>2023-01-23</td>
+                            <td>
+                                <a class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
+                                <a data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Joao Pedro Correia</td>
+                            <td>Jornalista</td>
+                            <td>Agencia de noticias Lusa</td>
+                            <td>968688008</td>
+                            <td>jpcorreia@gmail.com</td>
+                            <td>2023-02-15</td>
+                            <td>
+                                <a class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
+                                <a data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Teresa de Almeida</td>
+                            <td>Presidente</td>
+                            <td>Camera municipal de lagoa</td>
+                            <td>912219731</td>
+                            <td>teresaa@gmail.com</td>
+                            <td>2023-03-22</td>
+                            <td>
+                                <a class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
+                                <a data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Carlos Silva Maia</td>
+                            <td>Carpinteiro</td>
+                            <td>José Ferreira LDA</td>
+                            <td>912346019</td>
+                            <td>csmaia@gmail.com</td>
+                            <td>2023-04-15</td>
+                            <td>
+                                <a class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
+                                <a data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+    {% block script %}
+    <script>
+
+
+
+        $(document).ready(function(){
+            $('#table').DataTable({
+                responsive:true
+                
+            });
+        });
+
+        $('#addFile').on('click', function(e){
+            e.preventDefault();
+            $('#addFile2').click();
+        });
+
+
+
+        
+    </script>
+    {% endblock %}
