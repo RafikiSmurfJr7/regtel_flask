@@ -16,12 +16,15 @@ class DataBaseConnection:
             print("Error")
 
 
-    def makeQuery(self, query):
+    def getData(self, query):
         cursor = self.cnx.cursor()
         
         cursor.execute(query)
-    
+        
         return cursor.fetchall()
+
+    def insertData(self):
+        cursor = self.cnx
 
     def close(self):
         
