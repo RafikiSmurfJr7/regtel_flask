@@ -152,19 +152,23 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white">
+                        {% for value in data %}
                         <tr>
-                            <td>Id</td>
-                            <td>Nome</td>
-                            <td>Funcao</td>
-                            <td>entidade</td>
-                            <td>numero de telele</td>
-                            <td>email</td>
-                            <td>data de registo</td>
+                            
+                            <td>{{value.id}}</td>
+                            <td>{{value.nome}}</td>
+                            <td>{{value.funcao}}</td>
+                            <td>{{value.entidade}}</td>
+                            <td>{{value.numero}}</td>
+                            <td>{{value.email}}</td>
+                            <td>{{value.data_registo}}</td>
                             <td>
                                 <a class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
                                 <a data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
                             </td>
+                             
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
