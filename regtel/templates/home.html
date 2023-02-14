@@ -7,6 +7,7 @@
 
     {% block content %}
 
+    {% include 'navbar.html' %}
 
     <!--modal adicionar registo-->
 
@@ -122,8 +123,6 @@
     <!-- fim modal remover registo -->
 
 
-    
-    {% include 'navbar.html' %}
 
 
     <div class="container mt-4 mb-5">
@@ -153,21 +152,19 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        {% for (rows) in data %}
                         <tr>
-                            <td>{{rows[0]}}</td>
-                            <td>{{rows[1]}}</td>
-                            <td>{{rows[2]}}</td>
-                            <td>{{rows[3]}}/td>
-                            <td>{{[rows[4]]}}</td>
-                            <td>{{rows[5]}}</td>
-                            <td>{{rows[6]}}</td>
+                            <td>Id</td>
+                            <td>Nome</td>
+                            <td>Funcao</td>
+                            <td>entidade</td>
+                            <td>numero de telele</td>
+                            <td>email</td>
+                            <td>data de registo</td>
                             <td>
                                 <a class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
                                 <a data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        {%endfor%}
                     </tbody>
                 </table>
             </div>
