@@ -15,29 +15,22 @@ def index():
     elif request.method == 'POST':
 
         if request.form["dataNasc"] != '':
-                dataNasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d')
+                
+            data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d')
 
-                registo = Registo(
-                    nome = request.form["nome"],
-                    email = request.form["email"],
-
-                    data_nasc = dataNasc,
-                    
-                    numero = request.form["nTelPessoal"],
-                    funcao = request.form["funcao"],
-                    entidade = request.form["entidade"],
-                    data_registo = date.today()
-                )
         else:
-                registo = Registo(
-                    nome = request.form["nome"],
-                    email = request.form["email"],
-                    numero = request.form["nTelPessoal"],
-                    funcao = request.form["funcao"],
-                    entidade = request.form["entidade"],
-                    data_registo = date.today()
-                )
 
+            data_nasc = None
+
+        registo = Registo(
+            nome = request.form["nome"],
+            email = request.form["email"],
+            data_nasc = data_nasc,
+            numero = request.form["nTelPessoal"],
+            funcao = request.form["funcao"],
+            entidade = request.form["entidade"],
+            data_registo = date.today()
+        )
 
         db.session.add(registo)
         db.session.commit()
@@ -66,9 +59,42 @@ def profile(id):
 @app.route("/profile/edit/about/<int:id>", methods=['POST'])
 def profile_edit_about(id):
         
-        descricao = request.form['text']
+        descricao = request.form['sobre'].replace('\n','<br>')
 
         record = db.get_or_404(Registo, id)
         record.descricao = descricao
         db.session.commit()
-        return "succeed"
+
+        return redirect("/profile/" + str(id))
+
+
+@app.route("/profile/edit/data/<int:id>", methods=['POST'])
+def profile_edit_data(id):
+        
+    record = db.get_or_404(Registo, id)
+
+    if request.form["dataNasc"] != '':
+        data_nasc =  record.data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d')
+    else:    
+        data_nasc = None
+    
+    record.nome = request.form['nome']
+    record.data_nasc = data_nasc
+    record.email = request.form['email']
+    record.numero = request.form['telemovel']
+    record.entidade = request.form['entidade']
+    record.funcao = request.form['funcao']
+    
+    
+    db.session.commit()
+
+
+    return redirect("/profile/"+ str(id))
+
+@app.route('/profile/delete/about/<int:id>')
+def profile_delete_about(id):
+    
+    record = db.get_or_404(Registo, id)
+    record.descricao = None
+    db.session.commit()
+    return redirect('/profile/' + str(id))

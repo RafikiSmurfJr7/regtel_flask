@@ -48,3 +48,6 @@
     font-style: italic;
     padding-top: 2px;
 }
+.hover-op-75:hover{
+    opacity: 75%;
+}

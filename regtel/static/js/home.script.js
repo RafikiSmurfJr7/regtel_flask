@@ -26,7 +26,8 @@ $("#formAddRegisto").validate({
       nTelPessoal:{
         required: true,
         number: true,
-        minlength: 9
+        minlength: 9,
+        maxlength: 9
       },/*
       dataNasc:{
         required: true,
@@ -50,7 +51,8 @@ $("#formAddRegisto").validate({
       nTelPessoal:{
         required: "Preenchimento obrigatório",
         
-        minlength: jQuery.validator.format("O número tem de ter pelo menos {0} algarismos!")
+        minlength: jQuery.validator.format("O número tem de ter pelo menos {0} algarismos!"),
+        maxlength: jQuery.validator.format("O número tem de ter no maximo {0} algarismos!")
       },
       dataNasc:{
         required: "Data inválida"

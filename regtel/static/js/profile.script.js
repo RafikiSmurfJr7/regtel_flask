@@ -3,7 +3,7 @@ $('#file1').on('click',(e) => {
     e.preventDefault();
     $('#file2').click();
 });
-
+/*
 $('#btEditarSobre').on('click',(e)=>{
     e.preventDefault();
     
@@ -33,4 +33,79 @@ $('#btEditarSobre').on('click',(e)=>{
     if($('#textSobre').val() != 0)
         $('#sobre').html(text)  
     
+});*/
+
+$('#btEditarSobre').on('click',(e)=>{
+    e.preventDefault();
+    $('#formEditSobre').submit();
+
+})
+
+$("#formEditSobre").validate({
+    rules:{
+        sobre:{
+            required:true,
+        },
+    },
+    messages:{
+        sobre:{
+            required: 'Campo obrigatório'
+        }
+    }
+
+    
+
+});
+
+$('#btEditarDados').on('click',(e)=>{
+    e.preventDefault();
+    $('#formEditData').submit();
+});
+
+$('#formEditData').validate({
+    rules:{
+        nome:{
+            required:true,
+        },
+        email:{
+            required:false,
+            email:true,
+        },
+        telemovel:{
+            required:true,
+        },
+        entidade:{
+            required:true
+        }
+    },
+    messages:{
+        nome:{
+            required: 'Campo obrigatório'
+        },
+        telemovel:{
+            required:'Campo obrigatório',
+        },
+        entidade:{
+            required:'Campo obrigatório'
+        },
+        email:{
+            email:'Insira um endereço de email valido',
+        },
+    },
+    errorPlacement: function(error, element) {
+        if (element.attr('name') == 'nome') {
+          error.insertAfter("#inputGroupNome");
+        }else if(element.attr('name') == 'telemovel'){
+            error.insertAfter("#inputGroupTel");
+        }else if(element.attr('name') == 'entidade'){
+            error.insertAfter("#inputGroupEntidade");
+        }else {
+          error.insertAfter(element);
+        }
+      }
+});
+
+$('#btRemoverSobre').on('click',()=>{
+    let id = $('#btRemoverSobre').attr('reg-id')
+    location.href=`/profile/delete/about/${id}`
 });

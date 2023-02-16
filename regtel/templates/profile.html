@@ -13,7 +13,7 @@
     {% include 'navbar.html' %}
 
 
-    <!--modal alterar imagem-->
+    <!--modal alterar imagem
 
     <div class="modal fade" id="alterarImagem" tabindex="-1" aria-labelledby="alterarImagem" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -38,7 +38,8 @@
             </div>
         </div>
     </div>
-
+    
+    -->
 
     <!--fim modal alterar imagem-->
 
@@ -52,47 +53,47 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/profile/edit/data/{{data.id}}" method="POST" id="formEditData">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mt-3" id="inputGroupNome">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="nome"><i class="fa-solid fa-user"></i></span>
-                                        <input type="text" class="form-control border-reg" placeholder="Nome" aria-label="nome" aria-describedby="nome" value="{{data.nome}}">
+                                        <input name="nome" type="text" class="form-control border-reg" placeholder="Nome" aria-label="nome" aria-describedby="nome" value="{{data.nome}}">
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mt-3">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="data"><i class="fa-regular fa-calendar-days"></i></span>
-                                        <input type="date" class="form-control border-reg" placeholder="yyyy-mm-dd" aria-label="data" aria-describedby="data" value="{{data.data_nasc}}"">
+                                        <input name="dataNasc" type="date" class="form-control border-reg" placeholder="yyyy-mm-dd" aria-label="data" aria-describedby="data" value="{{data.data_nasc}}"">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mt-3">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="email"><i class="fa-solid fa-envelope"></i></span>
-                                        <input type="email" class="form-control border-reg" placeholder="Email" aria-label="email" aria-describedby="email" value="{{data.email}}">
+                                        <input name="email" type="email" class="form-control border-reg" placeholder="Email" aria-label="email" aria-describedby="email" value="{{data.email}}">
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mt-3" id="inputGroupTel">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="telemovel"><i class="fa-solid fa-phone"></i></span>
-                                        <input type="number" class="form-control border-reg" placeholder="Telemovel" aria-label="telemovel" aria-describedby="telemovel" value="{{data.numero}}">
+                                        <input name="telemovel" type="number" class="form-control border-reg" placeholder="Telemovel" aria-label="telemovel" aria-describedby="telemovel" value="{{data.numero}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mt-3" id="inputGroupEntidade">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="entidade"><i class="fa-solid fa-building"></i></span>
-                                        <input type="text" class="form-control border-reg" placeholder="Entidade" aria-label="entidade" aria-describedby="entidade" value="{{data.entidade}}">
+                                        <input name="entidade" type="text" class="form-control border-reg" placeholder="Entidade" aria-label="entidade" aria-describedby="entidade" value="{{data.entidade}}">
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mt-3">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="funcao"><i class="fa-solid fa-people-arrows"></i></span>
-                                        <input type="text" class="form-control border-reg" placeholder="Função" aria-label="funcao" aria-describedby="funcao" value="{{data.funcao}}">
+                                        <input name="funcao" type="text" class="form-control border-reg" placeholder="Função" aria-label="funcao" aria-describedby="funcao" value="{{data.funcao}}">
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +102,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-reg">Guardar alterações</button>
+                    <button type="button" class="btn btn-reg" id="btEditarDados">Guardar alterações</button>
                 </div>
             </div>
         </div>
@@ -120,14 +121,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/profile/edit/about/{{data.id}}" method="POST" id="formEditSobre">
                         <p class="text-secondary">Sobre si:</p>
-                        <textarea id='textSobre' class="form-control" placeholder="Escreva aqui..." rows="5"></textarea>
+                        <textarea id='sobre' name='sobre' class="form-control" placeholder="Escreva aqui..." rows="5"">{{data.descricao}}</textarea>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button id="btEditarSobre" type="button" class="btn btn-reg" reg-id="{{data.id}}" data-bs-dismiss="modal">Guardar alterações</button>
+                    <button id="btRemoverSobre" type="button" class="btn btn-danger" reg-id="{{data.id}}">Remover</button>
+                    <button id="btEditarSobre" type="button" class="btn btn-reg" reg-id="{{data.id}}">Guardar alterações</button>
                 </div>
             </div>
         </div>
@@ -142,7 +144,7 @@
     <div class="container">
         <div class="row justify-content-between mt-5">
             <div class="col-auto my-1">
-                <a href="/"><p class="fs-2 color-reg"><i class="fa-solid fa-circle-left"></i></p></a>
+                <a href="/"><p class="fs-2 color-reg hover-op-75"><i class="fa-solid fa-circle-left"></i></p></a>
             </div>
             <!--
             <div class="col-auto my-1">
@@ -154,7 +156,7 @@
             </div>
         </div>
         <div class="row align-items-center">
-            <div class="col-xl-5 ">
+            <div class="col-xl-5">
                 <div class="container mt-0 cont">
                     <div class="row justify-content-center row align-items-center">
                         <div class="col-auto text-center mt-1 mb-1">
@@ -187,15 +189,22 @@
                                 <hr>
                             </div>
                             {% if data.email != '' %}
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
+                                        <p class="mb-0 text-secondary ts-09r">Email</p>
+                                        <p class="mt-0 text-secondary"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;{{data.email}}</p>
+                                    </div>
+                                    <hr>
+                                </div>
+                            {% else %}
                             <div class="row justify-content-between">
                                 <div class="col-auto">
-                                    <p class="mb-0 text-secondary ts-09r">Email</p>
-                                    <p class="mt-0 text-secondary"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;{{data.email}}</p>
+                                    <p class="mb-0 text-secondary ts-09r">&nbsp;Email</p>
+                                    <p class="mt-0 text-secondary"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;<i>Sem endereço de email</i></p>
+                                    
                                 </div>
                                 <hr>
                             </div>
-                            {% else %}
-                                <div class="row justify-content-between">
                             {% endif %}
                             <div class="row justify-content-between">
                                 <div class="col-auto">
@@ -228,9 +237,9 @@
                         <div class="col">
                             <p class="text-secondary fs-5 mt-3 mb-1">Sobre:</p>
                             
-                            {% if not data.descricao%}
+                            {% if not data.descricao %}
                                 <p class="text-secondary mt-0" id="sobre">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquet, nisl eget aliquam molestie, nibh quam gravida est, a congue ipsum leo et tellus. Integer ut enim semper felis luctus finibus. Suspendisse tempus interdum hendrerit. Nunc viverra nec lectus iaculis feugiat. Phasellus aliquet risus eget mauris faucibus maximus. Phasellus accumsan convallis massa nec ultricies. Nunc dictum orci ut erat eleifend, ut pulvinar lectus iaculis. Nullam et bibendum orci.
+                                    <i>Sem conteúdo</i>
                                 </p>
                             {% else %}
                             
