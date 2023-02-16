@@ -10,30 +10,81 @@ $('#addFile').on('click', function(e){
     $('#addFile2').click();
 });
 
-$('#guardarRegisto').on('click', ()=>{
-    
-
-    let nome = $('#formAddRegisto input[name=nome').val();
-
-    let email = $('#formAddRegisto input[name=email').val();
-    
-    let date = $('#formAddRegisto input[name=date').val();
-
-    let nPessoal = $('#formAddRegisto input[name=nTelPessoal').val();
-
-    let nTrab = $('#formAddRegisto input[name=nTelTrab').val();
-
-    let funcao = $('#formAddRegisto input[name=funcao').val();
-
-    let entidade = $('#formAddRegisto input[name=entidade').val();
-    
-    var arr = [nome,email,date,nPessoal,nTrab,funcao,entidade]
-
-    for(c=0;c<=arr.length;c++){
-        if(arr[0].length < 0){
-            return
-        }
-    }
-    
-    $('#formAddRegisto').submit()
+$('#guardarRegisto').on('click', (e)=>{
+    $('#formAddRegisto').submit()    
 });
+
+$("#formAddRegisto").validate({
+    rules: {
+      nome: {
+        required: true,
+      },/*
+      email:{
+        required: true,
+        email: true
+      },*/
+      nTelPessoal:{
+        required: true,
+        number: true,
+        minlength: 9
+      },/*
+      dataNasc:{
+        required: true,
+        date:true
+      },/*
+      funcao:{
+        required: true,
+      },*/
+      entidade:{
+        required: true,
+      }
+    },
+    messages: {
+      nome: {
+        required: "Preenchimento obrigatório"
+      },
+      email:{
+        required: "Preenchimento obrigatório",
+        email: "Insira um endereço de email válido"
+      },
+      nTelPessoal:{
+        required: "Preenchimento obrigatório",
+        
+        minlength: jQuery.validator.format("O número tem de ter pelo menos {0} algarismos!")
+      },
+      dataNasc:{
+        required: "Data inválida"
+      },
+      funcao:{
+        required: "Preenchimento obrigatório",
+      },
+      entidade:{
+        required: "Preenchimento obrigatório",
+      }
+
+    },
+    errorPlacement: function(error, element) {
+        if (element.attr('name') == 'nome') {
+          error.insertAfter("#inputGroupNome");
+        } else if(element.attr('name') == 'email'){
+            error.insertAfter("#inputGroupEmail");
+        }else if(element.attr('name') == 'nTelPessoal'){
+            error.insertAfter("#inputGroupNum");
+        }else if(element.attr('name') == 'dataNasc'){
+            error.insertAfter("#inputGroupDataNasc");
+        }else if(element.attr('name') == 'funcao'){
+            error.insertAfter("#inputGroupFunc");
+        }else if(element.attr('name') == 'entidade'){
+            error.insertAfter("#inputGroupEntidade");
+        }else {
+          error.insertAfter(element);
+        }
+      }
+  });
+
+function clickRemoveRecord(id){
+    $('#btRemoverRegisto').on('click', (e)=>{
+        e.preventDefault();
+        location=`/delete/${id}`
+    });
+}
