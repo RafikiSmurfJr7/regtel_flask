@@ -43,3 +43,8 @@
 .ts-09r{
     font-size: 0.9rem;
 }
+.error{
+    color: rgb(236, 30, 30);
+    font-style: italic;
+    padding-top: 2px;
+}
