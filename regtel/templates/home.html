@@ -24,54 +24,49 @@
                         <form action="/" method="POST" id="formAddRegisto">
                             <div class="row">
                                 <div class="col">
-                                    <div class="input-group mt-2">
+                                    <div class="input-group mt-2" id="inputGroupNome">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="nome">Nome</span>
                                         <input name="nome" type="text" class="form-control border-reg" aria-label="Username" aria-describedby="nome">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-8">
-                                    <div class="input-group mt-3">
+                                <div class="col">
+                                    <div class="input-group mt-3" id="inputGroupEmail">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="email">Email</span>
                                         <input name="email" type="text" class="form-control border-reg" aria-label="Email" aria-describedby="email">
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="input-group mt-3">
-                                        <span class="input-group-text bg-color-reg color-white border-reg" id="data"><i class="fa-regular fa-calendar-days"></i></span>
-                                        <input name="date" type="date" class="form-control border-reg" aria-label="Data" aria-describedby="data">
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
-                                <div class="col">
-                                    <div class="input-group mt-3">
+                                <div class="col-8">
+                                    <div class="input-group mt-3" id="inputGroupNum">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="nPessoal">Nº Pessoal</span>
                                         <input name="nTelPessoal" type="number" class="form-control border-reg" aria-label="NPessoal" aria-describedby="nPessoal">
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="input-group mt-3">
-                                        <span class="input-group-text bg-color-reg color-white border-reg" id="nTrabalho">Nº Trabalho</span>
-                                        <input name="nTelTrab" type="number" class="form-control border-reg" aria-label="NTrabalho" aria-describedby="nTrabalho">
+                                    <div class="input-group mt-3" id="inputGroupDataNasc">
+                                        <span class="input-group-text bg-color-reg color-white border-reg" id="data"><i class="fa-regular fa-calendar-days"></i></span>
+                                        <input name="dataNasc" type="date" class="form-control border-reg" aria-label="Data" aria-describedby="data">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <div class="input-group mt-3">
+                                    <div class="input-group mt-3" id="inputGroupFunc">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="funcao">Função</span>
                                         <input name="funcao" type="text" class="form-control border-reg" aria-label="Funcao" aria-describedby="funcao">
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="input-group mt-3">
+                                    <div class="input-group mt-3" id="inputGroupEntidade">
                                         <span class="input-group-text bg-color-reg color-white border-reg" id="entidade">Entidade</span>
                                         <input name="entidade" type="text" class="form-control border-reg" aria-label="Entidade" aria-describedby="entidade">
                                     </div>
                                 </div>
                             </div>
+                            <!-- futura implementação do formulario de imagem
                             <div class="row justify-content-center">
                                 <div class="col-auto">
                                     <p class="ts-4r">
@@ -79,12 +74,14 @@
                                     </p>
                                 </div>
                             </div>
+                            
                             <div class="row justify-content-center">
                                 <div class="col-auto">
                                     <button id="addFile" class="btn btn-reg">Adicionar foto&nbsp;&nbsp;<i class="fa-solid fa-image"></i></button>
                                     <input style="display:none;" type="file" id="addFile2">
                                 </div>
                             </div>
+                            -->
                         </div>
                     </form>
                 </div>
@@ -113,7 +110,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-danger">Remover</button>
+                    <button type="button" class="btn btn-danger" id="btRemoverRegisto">Remover</button>
                 </div>
             </div>
         </div>
@@ -125,14 +122,14 @@
 
 
 
-    <div class="container mt-4 mb-5">
+    <div class="container-fluid mt-4 mb-5">
         <div class="row justify-content-end mb-3">
             <div class="col-auto">
                 <button class="btn btn-reg" data-bs-toggle="modal" data-bs-target="#adicionarRegisto">Adicionar registo&nbsp;&nbsp;<i class="fa-solid fa-plus"></i></button>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-auto">
+            <div class="col">
                 <table class="table py-3 text-center" id="table">
                     <thead>
                         <tr class="bg-color-reg">
@@ -145,10 +142,10 @@
                             <th>Nome</th>
                             <th>Função</th>
                             <th>Entidade</th>
-                            <th>Numero de telemovel</th>
+                            <th>Numero</th>
                             <th>Email</th>
                             <th>Data de registo</th>
-                            <th>Gerir Registo</th>
+                            <th>Gerir</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white">
@@ -163,8 +160,8 @@
                             <td>{{value.email}}</td>
                             <td>{{value.data_registo}}</td>
                             <td>
-                                <a class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
-                                <a data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
+                                <a href="/profile/{{value.id}}" class="c-pointer color-reg fs-5 me-2"><i class="fa-solid fa-eye"></i></a>
+                                <a onclick="clickRemoveRecord({{value.id}})" data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2"><i class="fa-solid fa-trash"></i></a>
                             </td>
                              
                         </tr>
