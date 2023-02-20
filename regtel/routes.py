@@ -10,17 +10,14 @@ def index():
 
         registo = db.session.execute(db.select(Registo).order_by(Registo.data_registo)).scalars()
 
+
         return render_template('home.html' ,data=registo)
-    
+
     elif request.method == 'POST':
 
-        if request.form["dataNasc"] != '':
-                
-            data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d')
-
-        else:
-
-            data_nasc = None
+        
+        data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d') if request.form["dataNasc"] != '' else  None
+            
 
         registo = Registo(
             nome = request.form["nome"],
@@ -32,11 +29,19 @@ def index():
             data_registo = date.today()
         )
 
-        db.session.add(registo)
-        db.session.commit()
+        try:
+            db.session.add(registo)
+            db.session.commit()
+
+        except db.exc.IntegrityError:
+
+            flash('Erro de integridade [Tentou inserir dados repetidos]','error')
+            
+            return redirect(url_for('index'))
+        
 
 
-        return redirect("/")
+        return redirect(url_for('index'))
     
 
 @app.route("/delete/<int:id>")
@@ -73,10 +78,8 @@ def profile_edit_data(id):
         
     record = db.get_or_404(Registo, id)
 
-    if request.form["dataNasc"] != '':
-        data_nasc =  record.data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d')
-    else:    
-        data_nasc = None
+    
+    data_nasc =  record.data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d') if request.form["dataNasc"] != '' else None
     
     record.nome = request.form['nome']
     record.data_nasc = data_nasc
@@ -85,9 +88,14 @@ def profile_edit_data(id):
     record.entidade = request.form['entidade']
     record.funcao = request.form['funcao']
     
-    
-    db.session.commit()
+    try:
+        db.session.commit()
+    except db.exc.IntegrityError:
 
+            flash('Erro de integridade [Tentou inserir dados de um contato existente]','error')
+            
+            return redirect('/profile/' +  str(id))
+        
 
     return redirect("/profile/"+ str(id))
 
