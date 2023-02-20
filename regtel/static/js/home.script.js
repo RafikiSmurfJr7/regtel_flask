@@ -90,3 +90,13 @@ function clickRemoveRecord(id){
         location=`/delete/${id}`
     });
 }
+
+const errorToast = $('#errorToast')
+
+$(document).ready(()=>{
+    const toast = new bootstrap.Toast(errorToast)
+    toast.show()
+})
+
+    
+

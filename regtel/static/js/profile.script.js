@@ -109,3 +109,11 @@ $('#btRemoverSobre').on('click',()=>{
     let id = $('#btRemoverSobre').attr('reg-id')
     location.href=`/profile/delete/about/${id}`
 });
+
+
+const errorToast = $('#errorToast')
+
+$(document).ready(()=>{
+    const toast = new bootstrap.Toast(errorToast)
+    toast.show()
+})
