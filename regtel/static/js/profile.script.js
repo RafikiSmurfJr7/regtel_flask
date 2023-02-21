@@ -72,7 +72,10 @@ $('#formEditData').validate({
             email:true,
         },
         telemovel:{
-            required:true,
+            required: true,
+            number: true,
+            minlength: 9,
+            maxlength: 9
         },
         entidade:{
             required:true
@@ -83,7 +86,9 @@ $('#formEditData').validate({
             required: 'Campo obrigatório'
         },
         telemovel:{
-            required:'Campo obrigatório',
+            required: "Preenchimento obrigatório",
+            minlength: jQuery.validator.format("O número tem de ter pelo menos {0} algarismos!"),
+            maxlength: jQuery.validator.format("O número tem de ter no maximo {0} algarismos!")
         },
         entidade:{
             required:'Campo obrigatório'
@@ -110,10 +115,13 @@ $('#btRemoverSobre').on('click',()=>{
     location.href=`/profile/delete/about/${id}`
 });
 
-
-const errorToast = $('#errorToast')
-
 $(document).ready(()=>{
-    const toast = new bootstrap.Toast(errorToast)
-    toast.show()
+    try{
+        const errorToast = $('#errorToast')
+        const toast = new bootstrap.Toast(errorToast)
+        toast.show()
+    }catch(err){
+        let error = err
+    }
+    
 })

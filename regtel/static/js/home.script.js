@@ -91,11 +91,17 @@ function clickRemoveRecord(id){
     });
 }
 
-const errorToast = $('#errorToast')
+
 
 $(document).ready(()=>{
-    const toast = new bootstrap.Toast(errorToast)
-    toast.show()
+    try {
+      const errorToast = $('#errorToast')
+      const toast = new bootstrap.Toast(errorToast)
+      toast.show()  
+    }catch(err) {
+      let error = err 
+    }
+    
 })
 
     
