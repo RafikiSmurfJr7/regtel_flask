@@ -1,20 +1,41 @@
-from regtel.extensions import Flask,SQLAlchemy
+from flask import Flask
 from regtel.config import Config
+from regtel.extensions import db,init_app,login_manager
+from flask_login import LoginManager
 
-db = SQLAlchemy()
 
-app = Flask(__name__)
-app.config.from_object(Config)
+def create_app():
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.sqlite"
-db.init_app(app)
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-try:
-    from regtel.models import *
-except:
-    print('\n-------------------------\n[erro ao importar model]\n-------------------------\n')
+    #app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.sqlite"
 
-with app.app_context():
-    db.create_all()
+    db.init_app(app)
+    login_manager.init_app(app)
+    init_app(app)
 
-from regtel.routes import *
+
+    
+
+    from . import routes
+    app.register_blueprint(routes.bp)
+
+    return app
+
+
+def create_database(app):
+    with app.app_context():
+        db.create_all()
+
+
+#try:
+#    from regtel.models import *
+#except:
+#    print('\n-------------------------\n[erro ao importar model]\n-------------------------\n')
+#
+#with app.app_context():
+#    db.create_all()
+
+
+    

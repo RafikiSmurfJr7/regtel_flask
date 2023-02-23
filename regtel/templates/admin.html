@@ -1,0 +1,169 @@
+{%extends 'base.html'%}
+
+{% block head %} 
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admin.style.css')}}">
+    <title>Administration</title>
+{% endblock %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+{% with error_message = get_flashed_messages(with_categories=true) %}
+    {%if error_message%}
+        {%for category,error in error_message%}
+            <!--ERROR Toast-->
+            <div class="toast-container align-items-center border-0 position-fixed bottom-0 mt-2 ms-2" role="alert" aria-live="assertive" aria-atomic="true" id="errorToast">
+                <div class="d-flex alert alert-{{category}}">
+                    <div class="toast-body pe-5">    
+                        {%autoescape false%}
+                            <b>
+                                {%if category == 'danger'%}
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                {%elif category == 'success'%}
+                                    <i class="fa-solid fa-circle-check"></i>
+                                {%elif category == 'warning'%}
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                {%endif%}
+                                &nbsp;&nbsp;{{error}}
+                            </b>
+                        {%endautoescape%}
+                    </div>
+                </div>
+            </div>
+            <!--Fim ERROR Toast-->
+        {%endfor%}
+    {%endif%}
+{%endwith%}
+
+<!--modal adicionar utilizador-->
+
+
+<div class="modal fade" id="adicionarUtilizador" tabindex="-1" aria-labelledby="adicionarUtilizador" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><b>Adicionar utilizador</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form action="/admin" method="POST" id="formAddUser">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mt-2" id="inputGroupUsername">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="username"><i class="fa-solid fa-user"></i></span>
+                                    <input name="username" type="text" class="form-control border-reg" aria-label="Username" aria-describedby="username" placeholder="Nome de utilizador">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mt-3" id="inputGroupEmail">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="email"><i class="fa-solid fa-envelope"></i></span>
+                                    <input name="email" type="text" class="form-control border-reg" aria-label="Email" aria-describedby="email" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mt-3" id="inputGroupPass">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="password"><i class="fa-solid fa-key"></i></span>
+                                    <input name="password" type="password" id="inputpassword" class="form-control border-reg" aria-label="Password" aria-describedby="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mt-3" id="inputGroupConfPass">
+                                    <span class="input-group-text bg-color-reg color-white border-reg" id="confPassword"><i class="fa-solid fa-key"></i></span>
+                                    <input name="confPassword" type="password" class="form-control border-reg" aria-label="confPassword" aria-describedby="confPassword" placeholder="Confirmar password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-reg" id="btAddUser">Adicionar utilizador</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--fim modal adicionar utilizador-->
+
+<!-- modal remover registo -->
+
+<div class="modal fade" id="removerUser" tabindex="-1" aria-labelledby="removerUser" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><b>Remover utilizador</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-secondary">Tem a certeza que deseja remover este utilizador?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" id="btRemoverUtilizador">Remover</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- fim modal remover registo -->
+
+
+
+
+<div class="container-fluid mt-4 mb-5">
+    <div class="row justify-content-end mb-3">
+        <div class="col-auto">
+            <button class="btn btn-reg" data-bs-toggle="modal" data-bs-target="#adicionarUtilizador">Adicionar utilizador&nbsp;&nbsp;<i class="fa-solid fa-user-plus"></i></button>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col">
+            <table class="table py-3 text-center" id="table">
+                <thead>
+                    <tr class="bg-color-reg">
+                        <td colspan="8" class="text-center color-white">
+                            <b>Utilizadores</b>
+                        </td>
+                    </tr>
+                    <tr class="bg-light-grey color-reg ">
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Remover</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    {% for value in data %}
+                    <tr>
+                        
+                        <td>{{value.id}}</td>
+                        <td>{{value.username}}</td>
+                        <td>{{value.email}}</td>
+                        <td>
+                            <a onclick="clickRemoveUser({{value.id}})" data-bs-toggle="modal" data-bs-target="#removerUser" class="c-pointer text-danger fs-5 ms-2 hover-op-75"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                         
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+<script src="{{url_for('static', filename='js/admin.script.js')}}"></script>
+
+{% endblock %}
