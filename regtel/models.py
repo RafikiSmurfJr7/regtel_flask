@@ -13,8 +13,8 @@ class Registo(db.Model):
     entidade = db.Column(db.String(50), nullable=False)
     descricao = db.Column(db.String(100))
     data_registo = db.Column(db.Date)
-
-
+    registado_por = db.Column(db.Integer, nullable=False)
+    visibilidade = db.Column(db.String(50), nullable=False, default='public')
 
 
 

@@ -60,7 +60,11 @@ def index():
 
         
         data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d') if request.form["dataNasc"] != '' else  None
-            
+        
+        try:
+            visibilidade = 'private' if request.form["regPrivado"] == 'on' else None    
+        except:
+            visibilidade = None
 
         registo = Registo(
             nome = request.form["nome"],
@@ -69,7 +73,9 @@ def index():
             numero = request.form["nTelPessoal"],
             funcao = request.form["funcao"],
             entidade = request.form["entidade"],
-            data_registo = date.today()
+            data_registo = date.today(),
+            registado_por = current_user.get_id(),
+            visibilidade = visibilidade
         )
 
         try:
@@ -117,20 +123,25 @@ def profile_edit_data(id):
     
     data_nasc =  record.data_nasc = datetime.strptime(request.form["dataNasc"],'%Y-%m-%d') if request.form["dataNasc"] != '' else None
     
+    try:
+        visibilidade = 'private' if request.form["regPrivado"] == 'on' else 'public'    
+    except:
+        visibilidade = 'public'
+
+
     record.nome = request.form['nome']
     record.data_nasc = data_nasc
     record.email = request.form['email']
     record.numero = request.form['telemovel']
     record.entidade = request.form['entidade']
     record.funcao = request.form['funcao']
-    
+    record.visibilidade = visibilidade
+
     try:
         db.session.commit()
     except db.exc.IntegrityError:
-
-            flash('Esse contato já está registado','danger')
-            
-            return redirect('/profile/' +  str(id))
+        flash('Esse contato já está registado','danger')      
+        return redirect('/profile/' +  str(id))
         
     flash(escape('Dados alterados com sucesso!'),'success')
     return redirect("/profile/"+ str(id))

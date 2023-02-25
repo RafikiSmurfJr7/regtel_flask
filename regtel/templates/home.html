@@ -68,6 +68,20 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="row justify-content-center mt-4">
+                                <hr>
+                                <div class="col-auto">
+                                    <div class="form-check form-switch form-check-reverse">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchRegPrivado" name="regPrivado">
+                                        <label class="form-check-label" for="flexSwitchRegPrivado">
+                                            <i class="fa-solid fa-lock color-reg"></i>
+                                            &nbsp;
+                                            Fazer deste registo um registo privado:
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- futura implementação do formulario de imagem
                             <div class="row justify-content-center">
                                 <div class="col-auto">
@@ -152,6 +166,7 @@
                     </thead>
                     <tbody class="bg-white">
                         {% for value in data %}
+                        {% if value.visibilidade == 'private' and value.registado_por == current_user.id or value.visibilidade == 'public'%}
                         <tr>
                             
                             <td>{{value.id}}</td>
@@ -165,8 +180,8 @@
                                 <a href="/profile/{{value.id}}" class="c-pointer color-reg fs-5 me-2 hover-op-75"><i class="fa-solid fa-eye "></i></a>
                                 <a onclick="clickRemoveRecord({{value.id}})" data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2 hover-op-75"><i class="fa-solid fa-trash"></i></a>
                             </td>
-                             
                         </tr>
+                        {%endif%}
                         {% endfor %}
                     </tbody>
                 </table>
