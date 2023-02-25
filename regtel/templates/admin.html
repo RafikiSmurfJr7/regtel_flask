@@ -118,16 +118,18 @@
                 </thead>
                 <tbody class="bg-white">
                     {% for value in data %}
-                    <tr>
-                        
-                        <td>{{value.id}}</td>
-                        <td>{{value.username}}</td>
-                        <td>{{value.email}}</td>
-                        <td>
-                            <a onclick="clickRemoveUser({{value.id}})" data-bs-toggle="modal" data-bs-target="#removerUser" class="c-pointer text-danger fs-5 ms-2 hover-op-75"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                         
-                    </tr>
+                        {% if value.id != 1 %}
+                        <tr>
+                            
+                            <td>{{value.id}}</td>
+                            <td>{{value.username}}</td>
+                            <td>{{value.email}}</td>
+                            <td>
+                                <a onclick="clickRemoveUser({{value.id}})" data-bs-toggle="modal" data-bs-target="#removerUser" class="c-pointer text-danger fs-5 ms-2 hover-op-75"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                            
+                        </tr>
+                        {%endif%}
                     {% endfor %}
                 </tbody>
             </table>
