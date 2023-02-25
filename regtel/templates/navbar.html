@@ -10,11 +10,11 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarlinks">
             <ul class="navbar-nav">
               <li class="nav-item m-2">
-                <a href="/" class="nav-link color-reg c-pointer" aria-current="page"><b {%if request.path == '/' %}class="active pb-1"{%endif%}><i class="fa-solid fa-phone-flip"></i>&nbsp;&nbsp;Registos</b></a>  
+                <a href="/" class="nav-link color-reg c-pointer" aria-current="page"><b><i class="fa-solid fa-phone-flip"></i>&nbsp;&nbsp;<span {%if request.path == '/' %}class="active pb-2"{%endif%}>Registos</span></b></a>  
               </li>
               {% if current_user.id == 1 %}
                 <li class="nav-item m-2">
-                  <a href="/admin" class="nav-link color-reg c-pointer" aria-current="page"><b {%if request.path == '/admin' %}class="active pb-1"{%endif%}><i class="fa-solid fa-users-gear"></i>&nbsp;&nbsp;Gerir utilizadores</b></a>
+                  <a href="/admin" class="nav-link color-reg c-pointer" aria-current="page"><b><i class="fa-solid fa-users-gear"></i>&nbsp;&nbsp;<span  {%if request.path == '/admin' %}class="active pb-2"{%endif%}> Gerir utilizadores</span></b></a>
                 </li>
               {%endif%}
             <li class="nav-item m-2">
