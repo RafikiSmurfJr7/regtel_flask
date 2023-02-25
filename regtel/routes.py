@@ -36,6 +36,8 @@ def login():
 @bp.route('/logout')
 @login_required
 def logout():
+    msg = 'Adeus ' + current_user.username
+    flash(msg, 'primary')
     logout_user()
     return redirect(url_for('registo.login'))
 
@@ -43,11 +45,14 @@ def logout():
 @bp.route("/", methods=['GET', 'POST'])
 @login_required
 def index():
-
+    
     if request.method == 'GET':
 
         registo = db.session.execute(db.select(Registo).order_by(Registo.data_registo)).scalars()
 
+        if current_user.is_authenticated:
+            msg = 'Olá ' + current_user.username
+            flash(msg, 'primary')
 
         return render_template('home.html' ,data=registo)
 
@@ -143,7 +148,7 @@ def profile_edit_about(id):
         db.session.commit()
 
 
-        flash(escape('Alteração guardada com sucesso!'),'success')
+        flash('Alteração guardada com sucesso!','success')
         return redirect("/profile/" + str(id))
 
 
@@ -156,7 +161,7 @@ def profile_delete_about(id):
     record.descricao = None
     db.session.commit()
 
-    flash(escape('Eliminado com sucesso!'),'warning')
+    flash('Eliminado com sucesso!','warning')
     return redirect('/profile/' + str(id))
 
 
@@ -184,14 +189,14 @@ def admin():
                 db.session.add(user)
                 db.session.commit()
             except db.exc.IntegrityError:
-                flash(escape('Email ou nome de utilizador já se encontram registados!'),'danger')
+                flash('Email ou nome de utilizador já se encontram registados!','danger')
                 return redirect(url_for('registo.admin'))
             
-            flash(escape('Utilizador registado com sucesso!'),'success')
+            flash('Utilizador registado com sucesso!','success')
             return redirect(url_for('registo.admin'))
 
         else:
-            flash(escape('Passwords não combinam!'),'danger')
+            flash('Passwords não combinam!','danger')
             
             return redirect(url_for('registo.admin'))
 

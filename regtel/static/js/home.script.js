@@ -93,18 +93,5 @@ function clickRemoveRecord(id){
 
 
 
-$(document).ready(()=>{
-    try {
-      const errorToast = $('#errorToast')
-      const toast = new bootstrap.Toast(errorToast)
-      toast.show()  
-    }catch(err) {
-      let error = err 
-    }
-    
-})
-const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-
     
 

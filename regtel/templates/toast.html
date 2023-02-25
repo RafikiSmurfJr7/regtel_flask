@@ -1,0 +1,26 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {%if messages%}
+        {%for category,msg in messages%}
+            <!--ERROR Toast-->
+            <div class="toast-container align-items-center border-0 position-fixed bottom-0 mt-2 ms-2 mb-2" >
+                <div  id="msgToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" >
+                    <div class="toast-body  alert alert-{{category}} m-0 pe-5 fs-6 py-3">    
+                        <b>
+                            {%if category == 'danger'%}
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            {%elif category == 'success'%}
+                                <i class="fa-solid fa-circle-check"></i>
+                            {%elif category == 'warning'%}
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            {%elif category == 'primary'%}
+                                <i class="fa-solid fa-hand"></i>
+                            {%endif%}
+                            &nbsp;&nbsp;{{msg}}
+                        </b>
+                    </div>
+                </div>
+            </div>
+            <!--Fim ERROR Toast-->
+        {%endfor%}
+    {%endif%}
+{%endwith%}

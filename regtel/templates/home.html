@@ -9,32 +9,7 @@
 
     {% include 'navbar.html' %}
 
-    {% with error_message = get_flashed_messages(with_categories=true) %}
-        {%if error_message%}
-            {%for category,error in error_message%}
-                <!--ERROR Toast-->
-                <div class="toast-container align-items-center border-0 position-fixed bottom-0 mt-2 ms-2" role="alert" aria-live="assertive" aria-atomic="true" id="errorToast">
-                    <div class="d-flex alert alert-{{category}}">
-                        <div class="toast-body pe-5">    
-                            {%autoescape false%}
-                                <b>
-                                    {%if category == 'danger'%}
-                                        <i class="fa-solid fa-circle-exclamation"></i>
-                                    {%elif category == 'success'%}
-                                        <i class="fa-solid fa-circle-check"></i>
-                                    {%elif category == 'warning'%}
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                    {%endif%}
-                                    &nbsp;&nbsp;{{error}}
-                                </b>
-                            {%endautoescape%}
-                        </div>
-                    </div>
-                </div>
-                <!--Fim ERROR Toast-->
-            {%endfor%}
-        {%endif%}
-    {%endwith%}
+    
 
     <!--modal adicionar registo-->
 
