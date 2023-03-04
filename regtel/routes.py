@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash,
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from regtel.models import User,Registo
-from regtel.extensions import db,login_manager
+from regtel.extensions import db,login_manager,make_admin
 from datetime import date, datetime
 
 
@@ -17,6 +17,7 @@ def unauthorized():
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    make_admin()
     if current_user.is_authenticated:
         return redirect(url_for('registo.index'))
     if request.method == 'POST':
@@ -212,7 +213,7 @@ def admin():
             return redirect(url_for('registo.admin'))
 
     else:
-    
+        
         users = db.session.execute(db.select(User).order_by(User.id)).scalars()
 
         return render_template('admin.html', data=users)
