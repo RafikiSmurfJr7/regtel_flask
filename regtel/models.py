@@ -13,7 +13,7 @@ class Registo(db.Model):
     entidade = db.Column(db.String(50), nullable=False)
     descricao = db.Column(db.String(100))
     data_registo = db.Column(db.Date)
-    registado_por = db.Column(db.Integer, nullable=False)
+    registado_por = db.Column(db.String(50), nullable=False)
     visibilidade = db.Column(db.String(50), nullable=False, default='public')
 
 
@@ -26,3 +26,4 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
+    

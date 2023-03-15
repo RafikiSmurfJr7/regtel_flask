@@ -49,11 +49,13 @@ def index():
     
     if request.method == 'GET':
 
-        registo = db.session.execute(db.select(Registo).order_by(Registo.data_registo)).scalars()
+        
 
         if current_user.is_authenticated:
             msg = 'Olá ' + current_user.username
             flash(msg, 'primary')
+
+        registo = db.session.execute(db.select(Registo).order_by(Registo.data_registo)).scalars()
 
         return render_template('home.html' ,data=registo)
 
@@ -75,7 +77,7 @@ def index():
             funcao = request.form["funcao"],
             entidade = request.form["entidade"],
             data_registo = date.today(),
-            registado_por = current_user.get_id(),
+            registado_por = current_user.username,
             visibilidade = visibilidade
         )
 

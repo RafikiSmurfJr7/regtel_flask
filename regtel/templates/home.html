@@ -149,7 +149,7 @@
                 <table class="table py-3 text-center" id="table">
                     <thead>
                         <tr class="bg-color-reg">
-                            <td colspan="8" class="text-center color-white">
+                            <td colspan="9" class="text-center color-white">
                                 <b>Registos Telefónicos</b>
                             </td>
                         </tr>
@@ -161,6 +161,7 @@
                             <th>Numero</th>
                             <th>Email</th>
                             <th>Data de registo</th>
+                            <th>Criado por</th>
                             <th>Gerir</th>
                         </tr>
                     </thead>
@@ -176,6 +177,7 @@
                             <td>{{value.numero}}</td>
                             <td>{{value.email}}</td>
                             <td>{{value.data_registo}}</td>
+                            <td>{{value.registado_por}}</td>
                             <td>
                                 <a href="/profile/{{value.id}}" class="c-pointer color-reg fs-5 me-2 hover-op-75"><i class="fa-solid fa-eye "></i></a>
                                 <a onclick="clickRemoveRecord({{value.id}})" data-bs-toggle="modal" data-bs-target="#removerRegisto" class="c-pointer text-danger fs-5 ms-2 hover-op-75"><i class="fa-solid fa-trash"></i></a>
