@@ -52,7 +52,6 @@
     opacity: 75%;
 }
 .active{
-    /*border-bottom: 3px solid #045f2870;*/
-    color: #012911;
+    border-bottom: 2.5px solid #045f28af;
     
 }
