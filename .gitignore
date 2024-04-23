@@ -1,2 +1,3 @@
 regtel/static/node_modules/
-env/
+.env/
+**/__pycache__/
